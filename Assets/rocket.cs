@@ -6,6 +6,7 @@ using UnityEngine;
 public class rocket : MonoBehaviour
 {
     Rigidbody rigidBody;
+    
     public GameObject rocky;
     void Start()
     {
