@@ -6,28 +6,56 @@ public class topscrpit : MonoBehaviour
 {
     public GameObject top;
     public GameObject rocket;
-    public float gravityboost;
+
+    float gravityboost;
+
     Rigidbody rigidbody2;
+    AudioSource rock;
+    Collision col;
+    MeshRenderer silmek;
+    SphereCollider yoketmek;
+
     void Start()
     {
         rigidbody2 = GetComponent<Rigidbody>();
         rigidbody2.useGravity = false;
+        rock = GetComponent<AudioSource>();
+        silmek = GetComponent<MeshRenderer>();
+        yoketmek = GetComponent<SphereCollider>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         falling();
     }
     void falling()
     {
-        if(top.transform.position.x-rocket.transform.position.x <= 6f)
+        if (top.transform.position.x - rocket.transform.position.x <= 6f)
         {
-            rigidbody2.AddRelativeForce(Vector3.down*gravityboost);
+            gravityboost = 18f;
+            rigidbody2.AddRelativeForce(Vector3.down * gravityboost);
         }
         else
         {
-            //gravityboost = 0;
+            gravityboost = 0;
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "FLOOR")
+        {
+            rock.Play();
+            Destroy(silmek);
+            Destroy(yoketmek);
+        }
+        else if (col.gameObject.tag == "ROCKET")
+        {
+            rock.Play();
+            Destroy(silmek);
+            Destroy(yoketmek);
         }
     }
 }
+
+

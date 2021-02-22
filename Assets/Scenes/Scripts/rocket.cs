@@ -49,4 +49,15 @@ public class rocket : MonoBehaviour
         }
     }
 
+    //void OnCollisionEnter(Collision col)
+    //{
+    //    if (col.gameObject.tag == "TOP")
+    //    {
+    //        Destroy(col.gameObject);
+    //    }
+    //}
 }
+
+
+
+
