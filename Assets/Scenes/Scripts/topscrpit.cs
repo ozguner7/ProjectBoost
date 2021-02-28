@@ -6,7 +6,6 @@ public class topscrpit : MonoBehaviour
 {
     public GameObject top;
     public GameObject rocket;
-
     float gravityboost;
 
     Rigidbody rigidbody2;
@@ -17,27 +16,30 @@ public class topscrpit : MonoBehaviour
 
     void Start()
     {
+        
         rigidbody2 = GetComponent<Rigidbody>();
         rigidbody2.useGravity = false;
-        rock = GetComponent<AudioSource>();
         silmek = GetComponent<MeshRenderer>();
+        silmek.enabled = false;
+        rock = GetComponent<AudioSource>();            
         yoketmek = GetComponent<SphereCollider>();
     }
 
     void Update()
     {
-        falling();
+        falling();     
     }
     void falling()
     {
         if (top.transform.position.x - rocket.transform.position.x <= 6f)
-        {
+        {          
             gravityboost = 18f;
             rigidbody2.AddRelativeForce(Vector3.down * gravityboost);
+            silmek.enabled = true;
         }
         else
         {
-            gravityboost = 0;
+            gravityboost = 0;           
         }
     }
 

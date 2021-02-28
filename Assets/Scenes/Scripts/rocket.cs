@@ -2,19 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class rocket : MonoBehaviour
 {
     Rigidbody rigidBody;
     new AudioSource audio;
-    public GameObject rocky;
+    public GameObject rocky;  
+
+    public Image ic;
+    public float yakit, maxyakit=1000;
+    public float yakma;
     
     void Start()
     {       
         rigidBody = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
     }
-    //SİLİNDİR VE KÜP ARASINDAKİ COLLİDER FARKI SORUNU !!
     void Update()
     {
         rotate();
@@ -36,10 +40,12 @@ public class rocket : MonoBehaviour
     }
 
      void thrust()
-    {
+     {
         if (Input.GetKey(KeyCode.Space))
         {
             rigidBody.AddRelativeForce(Vector3.up);
+            yakit -= Time.deltaTime * yakma;
+            ic.fillAmount = yakit / maxyakit;
             if (!audio.isPlaying)
                 audio.Play();
         }
@@ -47,15 +53,8 @@ public class rocket : MonoBehaviour
         {
             audio.Stop();
         }
-    }
-
-    //void OnCollisionEnter(Collision col)
-    //{
-    //    if (col.gameObject.tag == "TOP")
-    //    {
-    //        Destroy(col.gameObject);
-    //    }
-    //}
+     }
+    
 }
 
 
